@@ -49,10 +49,15 @@ age int,
 passportno  varchar(20),
 FOREIGN KEY (airline_code) REFERENCES airlines(code) on delete cascade);
 
-select * from PassengerReg;
+alter table passengerReg add column insert_time timestamp default current_timestamp;
+select * from passengerReg where airline_code='AI2' && insert_time >= (select max(insert_time) - interval 30 second from passengerReg);
 
-select * from PassengerReg where airline_code="6E";
+select * from PassengerReg order by p_id desc;
+delete from PassengerReg where P_id=6;
 
+select * from PassengerReg where airline_code="AI2" order by p_id desc limit 2 ;
+
+select * from PassengerReg where airline_code="AI2" && p_id>(select max(p_id) from passengerReg where p_id <> (select max(p_id) from passengerReg));
 
 Create table BookingsPerDay(
 id int auto_increment primary key, 

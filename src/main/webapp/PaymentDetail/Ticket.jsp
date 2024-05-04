@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@page import="connection.*"%>
 <%@page import="modelGetSet.*"%>
 <%@page import="operations.*"%>
 <%@page import="java.sql.*"%>
 
-<% 
+<%
 session = request.getSession();
 session.setMaxInactiveInterval(60 * 60);
 
@@ -25,64 +25,98 @@ float price = (Float) session.getAttribute("price");
 <head>
 <meta charset="ISO-8859-1">
 <title>Ticket</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-	crossorigin="anonymous"></script>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f0f0f0;
+	margin: 0;
+	padding: 20px;
+}
+
+.ticket {
+	max-width: 600px;
+	margin: 0 auto;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.ticket table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+.ticket table th, .ticket table td {
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	text-align: left;
+}
+
+.ticket table th {
+	background-color: #f0f0f0;
+}
+
+.ticket h2 {
+	margin-top: 0;
+}
+</style>
+
 </head>
-<body class="bg-image" style="background-image: url('../2.jpg'); 
-	background-repeat: no-repeat;
-	background-position:top;
-  	background-size: cover;">
-	
-	<h1 style="color : white">Payment Successful</h1><br>
-		<h3 style="color : white">Here is your Ticket</h3><br><br>
-	
-		<table style='text-align: center'
-			class="table table-light table-striped">
+<body class="bg-image"
+	style="background-image: url('../2.jpg'); background-repeat: no-repeat; background-position: top; background-size: cover;">
+
+
+	<h1 style="color: white; text-align: center">Your Ticket Confirm</h1>
+	<br>
+	<h2 style="color: white; text-align: center">Below your Ticket..!!</h2>
+	<br>
+	<br>
+
+
+	<div class="ticket">
+		<h2>Flight Ticket</h2>
+		<table>
 			<tr>
-			<th>Passenger Name</th>
-			<th>Airline</th>
-			<th>Flight ID</th>
-			<th>From</th>
-			<th>To</th>
-			<th>Price</th>
+				<th>Passenger Name</th>
+				<th>Airline</th>
+				<th>Flight ID</th>
+				<th>From</th>
+				<th>To</th>
+				<th>Price</th>
+
 			</tr>
-			<% 
-				try
-				{
+
+			<%
+			try {
 				String airlineCode1 = (String) session.getAttribute("airlineCode");
 				PassReg pr = new PassReg();
 				pr.setAirline_code(airlineCode1);
-			
+
 				PassRegOper pro = new PassRegOper();
 				ResultSet res = pro.ShowSelectPassRegDetail(pr);
-				
-				while(res.next())
-				{
+
+				while (res.next()) {
 			%>
-			
+
 			<tr align="center">
-			<td><%=res.getString("pname")%></td>
-			
-			<td><%=session.getAttribute("airlineCode") %></td>
-			<td><%=session.getAttribute("fid") %></td>
-			<td><%=session.getAttribute("sourceCode") %></td>
-			<td><%=session.getAttribute("destinationCode") %></td>
-			<td><%=session.getAttribute("price") %></td>
-			<%	} 
+				<td><%=res.getString("pname")%></td>
+
+				<td><%=session.getAttribute("airlineCode")%></td>
+				<td><%=session.getAttribute("fid")%></td>
+				<td><%=session.getAttribute("sourceCode")%></td>
+				<td><%=session.getAttribute("destinationCode")%></td>
+				<td><%=session.getAttribute("price")%></td>
+				<%
 				}
-				catch(Exception ex)
-				{
-					System.out.print(ex);
+				} catch (Exception ex) {
+				System.out.print(ex);
 				}
-			%>
+				%>
 			</tr>
 		</table>
+	</div>
 </body>
 </html>

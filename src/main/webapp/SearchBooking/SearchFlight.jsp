@@ -43,8 +43,8 @@
 
 	<form name="SearchFlight" method="POST" >
 
-		<label>From : </label> 
-		<select name="srcfli"><option> Source </option>
+		<label>To : </label> 
+		<select name="srcfli"><option> Destination </option>
 			<%
 		AdminAirportOper aao1 = new AdminAirportOper();
 		
@@ -59,8 +59,8 @@
 		</select>  
 		&nbsp;&nbsp;
 		
-		<label>To :</label> <select name="desfli">
-			<option> Destination </option>
+		<label>From :</label> <select name="desfli">
+			<option> Source </option>
 			<%
 		AdminAirportOper aao = new AdminAirportOper();
 		
