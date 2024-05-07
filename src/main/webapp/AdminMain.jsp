@@ -19,6 +19,13 @@
 	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 	crossorigin="anonymous"></script>
 
+<script type="text/javascript">
+window.history.forward();
+function noBack(){
+	window.history.forward();
+}
+</script>
+
 </head>
 <body class="bg-image"; style="background-image: url('1.jpg'); 
 background-repeat: no-repeat;

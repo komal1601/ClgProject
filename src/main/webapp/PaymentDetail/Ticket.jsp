@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <%@page import="connection.*"%>
 <%@page import="modelGetSet.*"%>
 <%@page import="operations.*"%>
 <%@page import="java.sql.*"%>
 
-<%
+<% 
 session = request.getSession();
 session.setMaxInactiveInterval(60 * 60);
 
@@ -65,58 +65,56 @@ body {
 </style>
 
 </head>
-<body class="bg-image"
-	style="background-image: url('../2.jpg'); background-repeat: no-repeat; background-position: top; background-size: cover;">
-
-
-	<h1 style="color: white; text-align: center">Your Ticket Confirm</h1>
-	<br>
-	<h2 style="color: white; text-align: center">Below your Ticket..!!</h2>
-	<br>
-	<br>
-
-
+<body class="bg-image" style="background-image: url('../2.jpg'); 
+	background-repeat: no-repeat;
+	background-position:top;
+  	background-size: cover;">
+	
+	<h1 style="color : white; text-align: center">Your Ticket Confirm</h1><br>
+		<h2 style="color : white; text-align: center">Below your Ticket..!!</h2><br><br>
+	
 	<div class="ticket">
 		<h2>Flight Ticket</h2>
 		<table>
+		
 			<tr>
-				<th>Passenger Name</th>
-				<th>Airline</th>
-				<th>Flight ID</th>
-				<th>From</th>
-				<th>To</th>
-				<th>Price</th>
-
+			<th>Passenger Name</th>
+			<th>Airline</th>
+			<th>Flight ID</th>
+			<th>From</th>
+			<th>To</th>
+			<th>Price</th>
 			</tr>
-
-			<%
-			try {
+			<% 
+				try
+				{
 				String airlineCode1 = (String) session.getAttribute("airlineCode");
 				PassReg pr = new PassReg();
 				pr.setAirline_code(airlineCode1);
-
+			
 				PassRegOper pro = new PassRegOper();
 				ResultSet res = pro.ShowSelectPassRegDetail(pr);
-
-				while (res.next()) {
+				
+				while(res.next())
+				{
 			%>
-
+			
 			<tr align="center">
-				<td><%=res.getString("pname")%></td>
-
-				<td><%=session.getAttribute("airlineCode")%></td>
-				<td><%=session.getAttribute("fid")%></td>
-				<td><%=session.getAttribute("sourceCode")%></td>
-				<td><%=session.getAttribute("destinationCode")%></td>
-				<td><%=session.getAttribute("price")%></td>
-				<%
+			<td><%=res.getString("pname")%></td>
+			
+			<td><%=session.getAttribute("airlineCode") %></td>
+			<td><%=session.getAttribute("fid") %></td>
+			<td><%=session.getAttribute("sourceCode") %></td>
+			<td><%=session.getAttribute("destinationCode") %></td>
+			<td><%=session.getAttribute("price") %></td>
+			<%	} 
 				}
-				} catch (Exception ex) {
-				System.out.print(ex);
+				catch(Exception ex)
+				{
+					System.out.print(ex);
 				}
-				%>
+			%>
 			</tr>
 		</table>
-	</div>
 </body>
 </html>

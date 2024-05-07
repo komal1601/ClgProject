@@ -31,16 +31,17 @@ public class PassRegOper {
 		return chk;
 	}
 
-	public ResultSet ShowAllPassRegDetail() {
-		ResultSet rs = null;
-		try {
-			ps = con.prepareStatement("select * from PassengerReg order by p_id desc limit 2");
-			rs = ps.executeQuery();
-		} catch (Exception ex) {
-			rs = null;
-		}
-		return rs;
-	}
+//	public ResultSet ShowAllPassRegDetail(PassReg pass) {
+//		ResultSet rs = null;
+//		try {
+//			ps = con.prepareStatement("select * from passengerReg where airline_code=? && insert_time >= (select max(insert_time) - interval 60 second from passengerReg)");
+//			ps.setString(1, pass.getAirline_code());
+//			rs = ps.executeQuery();
+//		} catch (Exception ex) {
+//			rs = null;
+//		}
+//		return rs;
+//	}
 	
 	public ResultSet ShowSelectPassRegDetail(PassReg passr) {
 		ResultSet rs = null;
@@ -50,7 +51,7 @@ public class PassRegOper {
 			 select * from passengerReg where airline_code='AI2' && insert_time >= (select max(insert_time) from passengerReg);
 			 select * from PassengerReg where airline_code=? && p_id>(select max(p_id) from passengerReg where p_id <> (select max(p_id) from passengerReg))
 			 */
-			ps = con.prepareStatement("select * from passengerReg where airline_code=? && insert_time >= (select max(insert_time) - interval 30 second from passengerReg)");
+			ps = con.prepareStatement("select * from passengerReg where airline_code=? && insert_time >= (select max(insert_time) - interval 60 second from passengerReg)");
 			ps.setString(1, passr.getAirline_code());
 			rs = ps.executeQuery();
 		} 

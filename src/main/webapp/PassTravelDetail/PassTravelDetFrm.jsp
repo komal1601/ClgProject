@@ -56,12 +56,16 @@ session.setMaxInactiveInterval(60 * 60);
 				<td>Passenger ID</td>
 				<td><select name="ddlpid"><option> Select Name </option>
 				
-				<% 	PassRegOper pro = new PassRegOper();
-					ResultSet rs = pro.ShowAllPassRegDetail();
-					while(rs.next())
+				<% 	String airlineCode1 = (String) session.getAttribute("airlineCode");
+				PassReg pr = new PassReg();
+				pr.setAirline_code(airlineCode1);
+			
+				PassRegOper pro = new PassRegOper();
+				ResultSet res = pro.ShowSelectPassRegDetail(pr);
+					while(res.next())
 						{
 				%>
-				<option value='<%=rs.getString("P_id") %>'><%=rs.getString("Pname") %></option>
+				<option value='<%=res.getString("P_id") %>'><%=res.getString("Pname") %></option>
 				<% 
 						}
 				%>

@@ -50,8 +50,14 @@ String currentTime = dateFormat.format(currentDate);
 				<td><select name="ddlPId">
 						<option>Passenger ID</option>
 						<%
+						String airlineCode1 = (String) session.getAttribute("airlineCode");
+						PassReg pr = new PassReg();
+						pr.setAirline_code(airlineCode1);
+					
 						PassRegOper pro = new PassRegOper();
-						ResultSet rs = pro.ShowAllPassRegDetail();
+						ResultSet rs = pro.ShowSelectPassRegDetail(pr);
+						
+						
 						while (rs.next()) {
 						%>
 						<option value="<%=rs.getInt("P_id")%>"><%=rs.getString("Pname")%></option>
